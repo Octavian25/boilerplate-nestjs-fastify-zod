@@ -281,3 +281,6 @@ const hash = generateSignature(apiKey, apiSecret, accessToken, timestamp)
     - [Pablo Martinez - Hexagonal Architecture](https://medium.com/ssense-tech/hexagonal-architecture-there-are-always-two-sides-to-every-story-bc0780ed7d9c)
     - [Royi Benita - Generic Repository NestJS](https://betterprogramming.pub/implementing-a-generic-repository-pattern-using-nestjs-fb4db1b61cce)
     - [NestJS Docs](https://docs.nestjs.com/)
+
+* ## Special Credit 🎉🎉
+   - [Rizky Ridwan - Main Creator For This Project](https://github.com/rizkyridwan-id)
