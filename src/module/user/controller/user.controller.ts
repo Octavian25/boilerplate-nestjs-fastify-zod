@@ -21,6 +21,7 @@ import {
   UpdateUserRequestProps,
 } from '../contract/user.request.contract';
 import { GetPaginationProps } from 'src/core/contract/get-pagination.request.contract';
+import { GetUserByUserId } from '../use-case/get-user-by-user-id.use-case';
 
 @Controller('v1/users')
 export class UsersController {
@@ -28,6 +29,7 @@ export class UsersController {
     private readonly deleteUser: DeleteUser,
     private readonly updateUser: UpdateUser,
     private readonly getUser: GetUser,
+    private readonly getUserByUserId: GetUserByUserId,
     private readonly createUser: CreateUser,
   ) {}
 
@@ -44,8 +46,15 @@ export class UsersController {
     return this.getUser.execute({ data: query });
   }
 
+  @SecureGet('/by-id')
+  async getUserByUserIdHandler(@AuthUser() user: JwtDecoded) {
+    return this.getUserByUserId.execute({ data: user });
+  }
+
   @SecureDelete(':_id')
   async deleteUserHandler(@Param('_id') _id: string) {
+    console.log(_id);
+
     return this.deleteUser.execute({ _id });
   }
 

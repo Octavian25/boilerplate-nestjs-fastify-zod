@@ -55,6 +55,7 @@ export class LoginUser extends BaseUseCase<TLoginPayload, TLoginResponse> {
     return new ResponseDto({
       status: HttpStatus.OK,
       data: {
+        _id: userObject._id,
         user_id: userObject.user_id,
         access_token: accessToken,
         refresh_token: refreshToken,

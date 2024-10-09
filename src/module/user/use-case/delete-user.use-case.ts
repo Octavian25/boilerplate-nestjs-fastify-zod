@@ -6,6 +6,7 @@ import {
 } from 'src/core/base/module/use-case.base';
 import { InjectUserRepository } from '../repository/user.repository.provider';
 import { UserRepositoryPort } from 'src/module/user/repository/user.repository.port';
+import { ObjectIdVO } from '@src/core/value-object/object-id.value-object';
 
 type TDeleteUserPayload = Pick<IUseCasePayload<never>, '_id'>;
 type TDeleteUserResponse = ResponseDto;
@@ -23,7 +24,9 @@ export class DeleteUser extends BaseUseCase<
 
   public async execute({ _id }: TDeleteUserPayload): Promise<ResponseDto> {
     try {
-      await this.userRepository.delete({ _id });
+      await this.userRepository.delete({
+        _id: new ObjectIdVO(_id).valueConverted,
+      });
     } catch (err) {
       this.logger.error(err);
       if (err instanceof HttpException) throw err;
