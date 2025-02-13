@@ -51,7 +51,6 @@
             "  }",
             "}",
             ""
-
         ],
         "create-mapper": [
             "import { <FTName | pascalcase>Entity } from './<FTName | paramcase>.entity';",
