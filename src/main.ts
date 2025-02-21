@@ -22,9 +22,8 @@ async function bootstrap() {
 
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter({ logger: true }),
+    new FastifyAdapter({ https: secureOptions }),
     {
-      ...secureOptions,
       logger: new CustomLogger(),
       cors: true, // change this to Client IP when Production
     },
@@ -32,7 +31,6 @@ async function bootstrap() {
 
   await app.register(fastifyCsrf);
   await app.register(fastifyHelmet);
-
   app.setGlobalPrefix('api');
 
   app.useGlobalInterceptors(new DebugLoggerInterceptor());
@@ -71,7 +69,8 @@ function generateHttpsModeOption(httpsMode: boolean): NestApplicationOptions {
     const credentials: HttpsOptions = {
       key: privateKey,
       cert: certificate,
-      passphrase: '??',
+      requestCert: false,
+      rejectUnauthorized: false,
     };
     return { httpsOptions: credentials };
   }
